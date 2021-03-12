@@ -52,7 +52,7 @@ help::
 TARGET ?= hw
 
 # ################### Setting up default value of DEVICE ##############################
-DEVICE ?= xilinx_u250_xdma_201830_2
+DEVICE ?= xilinx_u250_gen3x16_xdma_3_1_202020_1
 
 # ###################### Setting up default value of HOST_ARCH ####################### 
 HOST_ARCH ?= x86
@@ -83,7 +83,7 @@ export XCL_BINDIR = $(XCLBIN_DIR)
 #Include Required Host Source Files
 HOST_SRCS += $(XFLIB_DIR)/L3/examples/gemm/gemm_example.cpp
 
-CXXFLAGS += -D_GLIBCXX_USE_CXX11_ABI=0
+CXXFLAGS += -D_GLIBCXX_USE_CXX11_ABI=1
 CXXFLAGS += -I$(XFLIB_DIR)/L3/include/sw
 CXXFLAGS += -I$(XFLIB_DIR)/L3/examples/gemm
 LDFLAGS += -luuid -lxrt_coreutil
@@ -98,8 +98,8 @@ CXXFLAGS += -D HW_EMU_TEST
 endif
 
 # ######################### Host compiler global settings ############################
-CXXFLAGS += -I$(XILINX_XRT)/include -I$(XILINX_VIVADO)/include -std=c++14 -O3 -Wall -Wno-unknown-pragmas -Wno-unused-label
-LDFLAGS += -L$(XILINX_XRT)/lib -lOpenCL -lpthread -lrt -Wno-unused-label -Wno-narrowing -DVERBOSE
+CXXFLAGS += -g -I$(XILINX_XRT)/include -I$(XILINX_VIVADO)/include -std=c++14 -O3 -Wall -Wno-unknown-pragmas -Wno-unused-label
+LDFLAGS += -g -L$(XILINX_XRT)/lib -lOpenCL -lpthread -lrt -Wno-unused-label -Wno-narrowing -DVERBOSE
 CXXFLAGS += -fmessage-length=0 
 CXXFLAGS += -I$(CUR_DIR)/src/ 
 
@@ -194,8 +194,10 @@ $(EMCONFIG_DIR)/emconfig.json:
 	emconfigutil --platform $(XPLATFORM) --od $(EMCONFIG_DIR)
 
 
+LD_LIBRARY_PATH := /usr/lib/x86_64-linux-gnu:$(LD_LIBRARY_PATH)
 # ###############Setting Essential Checks And Running Rules For Vitis Flow #############
 run: all
+	echo ${LD_LIBRARY_PATH}
 	XCL_EMULATION_MODE=$(TARGET) make dump_config
 ifeq ($(TARGET),$(filter $(TARGET),sw_emu hw_emu))
 	$(CP) $(EMCONFIG_DIR)/emconfig.json .

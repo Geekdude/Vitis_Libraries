@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "L3 Example Launch SW",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/blas/L3/examples/gemm/build_dir.sw_emu.xilinx_u250_gen3x16_xdma_3_1_202020_1/gemm_example.exe",
+            "args": [ "blas.xclbin", "config_info.dat" ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/blas/L3/examples/gemm/build_dir.sw_emu.xilinx_u250_gen3x16_xdma_3_1_202020_1/",
+            "environment": [{ "name": "XCL_EMULATION_MODE", "value": "sw_emu"}],
+            "externalConsole": false,
+            "MIMode": "gdb",
+        }, 
+        {
+            "name": "L3 Example Launch SW",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/blas/L3/examples/gemm/build_dir.hw_emu.xilinx_u250_gen3x16_xdma_3_1_202020_1/gemm_example.exe",
+            "args": [ "blas.xclbin", "config_info.dat" ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/blas/L3/examples/gemm/build_dir.hw_emu.xilinx_u250_gen3x16_xdma_3_1_202020_1/",
+            "environment": [{ "name": "XCL_EMULATION_MODE", "value": "hw_emu"}],
+            "externalConsole": false,
+            "MIMode": "gdb",
+        }
+    ]
+}

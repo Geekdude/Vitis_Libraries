@@ -45,14 +45,14 @@ class XFpga {
    public:
     xrt::device m_device;
     xrt::uuid m_uuid;
-    vector<string> m_cuNames;
+    vector<xrt::xclbin::kernel> m_cuNames;
 
     XFpga() = delete;
     XFpga(const char* p_xclbin, int* p_err, unsigned int deviceIndex = 0) {
         m_device = xrt::device(deviceIndex);
         m_uuid = m_device.load_xclbin(p_xclbin);
         auto l_xclbin = xrt::xclbin(p_xclbin);
-        m_cuNames = l_xclbin.get_cu_names();
+        m_cuNames = l_xclbin.get_kernels();
     }
 
     ~XFpga() {}
@@ -111,7 +111,7 @@ class XHost {
     XHost() = delete;
     XHost(const char* p_xclbin, xfblasStatus_t* p_status, unsigned int p_kernelIndex, unsigned int p_deviceIndex) {
         m_fpga = XFpgaHold::instance().m_xFpgaPtr[p_deviceIndex];
-        xrt::kernel l_kernel = xrt::kernel(m_fpga->m_device, m_fpga->m_uuid.get(), m_fpga->m_cuNames[p_kernelIndex]);
+        xrt::kernel l_kernel = xrt::kernel(m_fpga->m_device, m_fpga->m_uuid.get(), m_fpga->m_cuNames[p_kernelIndex].get_name());
         m_kernel.push_back(l_kernel);
         m_memId = m_kernel[0].group_id(0);
 
