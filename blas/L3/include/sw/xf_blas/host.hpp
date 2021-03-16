@@ -188,7 +188,7 @@ class XHost {
             return XFBLAS_STATUS_ALLOC_FAILED;
         } else {
             xrt::bo l_deviceHandle = xrt::bo(m_fpga->m_device, p_bufSize, XCL_BO_FLAGS_NONE, m_memId);
-            p_devPtr = l_deviceHandle.map<t_dataType*>();
+            *p_devPtr = l_deviceHandle.map<t_dataType>();
             memset(*p_devPtr, 0, p_bufSize);
             l_hostSzPtr[*p_devPtr] = p_bufSize;
             l_devPtr[*p_devPtr] = xrt::bo(l_deviceHandle);
