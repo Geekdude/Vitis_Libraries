@@ -27,6 +27,18 @@
             "environment": [{ "name": "XCL_EMULATION_MODE", "value": "hw_emu"}],
             "externalConsole": false,
             "MIMode": "gdb",
+        },
+        {
+            "name": "Det Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/../miniqmc/build/bin/check_wfc",
+            "args": [ "-f", "Det" ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/../miniqmc/build/bin",
+            "environment": [{ "name": "XCL_EMULATION_MODE", "value": "hw_emu"}],
+            "externalConsole": false,
+            "MIMode": "gdb",
         }
     ]
 }

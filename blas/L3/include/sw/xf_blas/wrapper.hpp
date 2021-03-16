@@ -54,7 +54,7 @@ namespace blas {
  * @retval xfblasStatus_t 2 if the xclbin doesn't contain the engine
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasCreate(const char* xclbin,
+inline xfblasStatus_t xfblasCreate(const char* xclbin,
                             string configFile,
                             xfblasEngine_t engineName,
                             unsigned int kernelNumber = 1,
@@ -112,7 +112,7 @@ xfblasStatus_t xfblasCreate(const char* xclbin,
  * @retval xfblasStatus_t 3 if there is memory already allocated to the same matrix
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasMalloc(
+inline xfblasStatus_t xfblasMalloc(
     short** devPtr, int rows, int lda, int elemSize, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -161,7 +161,7 @@ xfblasStatus_t xfblasMalloc(
     }
 }
 
-xfblasStatus_t xfblasMalloc(
+inline xfblasStatus_t xfblasMalloc(
     float** devPtr, int rows, int lda, int elemSize, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -226,7 +226,7 @@ xfblasStatus_t xfblasMalloc(
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  * @retval xfblasStatus_t 5 if rows, cols or lda is not padded correctly
  */
-xfblasStatus_t xfblasMallocRestricted(
+inline xfblasStatus_t xfblasMallocRestricted(
     int rows, int cols, int elemSize, void* A, int lda, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -293,7 +293,7 @@ xfblasStatus_t xfblasMallocRestricted(
  * @retval xfblasStatus_t 3 if there is memory already allocated to the same matrix
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasMallocManaged(short** devPtr,
+inline xfblasStatus_t xfblasMallocManaged(short** devPtr,
                                    int* paddedLda,
                                    int rows,
                                    int lda,
@@ -351,7 +351,7 @@ xfblasStatus_t xfblasMallocManaged(short** devPtr,
     }
 }
 
-xfblasStatus_t xfblasMallocManaged(float** devPtr,
+inline xfblasStatus_t xfblasMallocManaged(float** devPtr,
                                    int* paddedLda,
                                    int rows,
                                    int lda,
@@ -425,7 +425,7 @@ xfblasStatus_t xfblasMallocManaged(float** devPtr,
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasSetMatrix(int rows,
+inline xfblasStatus_t xfblasSetMatrix(int rows,
                                int cols,
                                int elemSize,
                                short* A,
@@ -456,7 +456,7 @@ xfblasStatus_t xfblasSetMatrix(int rows,
     }
 }
 
-xfblasStatus_t xfblasSetMatrix(int rows,
+inline xfblasStatus_t xfblasSetMatrix(int rows,
                                int cols,
                                int elemSize,
                                float* A,
@@ -503,7 +503,7 @@ xfblasStatus_t xfblasSetMatrix(int rows,
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the vector
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasSetVector(
+inline xfblasStatus_t xfblasSetVector(
     int n, int elemSize, short* x, int incx, short* d_x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -526,7 +526,7 @@ xfblasStatus_t xfblasSetVector(
     }
 }
 
-xfblasStatus_t xfblasSetVector(
+inline xfblasStatus_t xfblasSetVector(
     int n, int elemSize, float* x, int incx, float* d_x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -559,7 +559,7 @@ xfblasStatus_t xfblasSetVector(
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasSetMatrixRestricted(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasSetMatrixRestricted(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -578,7 +578,7 @@ xfblasStatus_t xfblasSetMatrixRestricted(void* A, unsigned int kernelIndex = 0, 
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the vector
  */
-xfblasStatus_t xfblasSetVectorRestricted(void* x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasSetVectorRestricted(void* x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -595,7 +595,7 @@ xfblasStatus_t xfblasSetVectorRestricted(void* x, unsigned int kernelIndex = 0, 
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for some of the matrices in the host memory
  */
-xfblasStatus_t xfblasDeviceSynchronize(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasDeviceSynchronize(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -622,7 +622,7 @@ xfblasStatus_t xfblasDeviceSynchronize(unsigned int kernelIndex = 0, unsigned in
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasGetMatrix(int rows,
+inline xfblasStatus_t xfblasGetMatrix(int rows,
                                int cols,
                                int elemSize,
                                short* d_A,
@@ -653,7 +653,7 @@ xfblasStatus_t xfblasGetMatrix(int rows,
     }
 }
 
-xfblasStatus_t xfblasGetMatrix(int rows,
+inline xfblasStatus_t xfblasGetMatrix(int rows,
                                int cols,
                                int elemSize,
                                float* d_A,
@@ -697,7 +697,7 @@ xfblasStatus_t xfblasGetMatrix(int rows,
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the vector
  */
-xfblasStatus_t xfblasGetVector(
+inline xfblasStatus_t xfblasGetVector(
     int n, int elemSize, short* d_x, short* x, int incx, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -720,7 +720,7 @@ xfblasStatus_t xfblasGetVector(
     }
 }
 
-xfblasStatus_t xfblasGetVector(
+inline xfblasStatus_t xfblasGetVector(
     int n, int elemSize, float* d_x, float* x, int incx, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
@@ -752,7 +752,7 @@ xfblasStatus_t xfblasGetVector(
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasGetMatrixRestricted(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasGetMatrixRestricted(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -770,7 +770,7 @@ xfblasStatus_t xfblasGetMatrixRestricted(void* A, unsigned int kernelIndex = 0, 
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasGetVectorRestricted(void* x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasGetVectorRestricted(void* x, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -788,7 +788,7 @@ xfblasStatus_t xfblasGetVectorRestricted(void* x, unsigned int kernelIndex = 0, 
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasFree(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasFree(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -803,7 +803,7 @@ xfblasStatus_t xfblasFree(void* A, unsigned int kernelIndex = 0, unsigned int de
  * @retval xfblasStatus_t 0 if the operation completed successfully
  * @retval xfblasStatus_t 1 if the library was not initialized
  */
-xfblasStatus_t xfblasFreeInstr(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasFreeInstr(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -818,7 +818,7 @@ xfblasStatus_t xfblasFreeInstr(unsigned int kernelIndex = 0, unsigned int device
  * @retval xfblasStatus_t 0 if the shut down succeeded
  * @retval xfblasStatus_t 1 if the library was not initialized
  */
-xfblasStatus_t xfblasDestroy(unsigned int kernelNumber = 1, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasDestroy(unsigned int kernelNumber = 1, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.empty()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -856,7 +856,7 @@ xfblasStatus_t xfblasDestroy(unsigned int kernelNumber = 1, unsigned int deviceI
  * @retval xfblasStatus_t 3 if not all the matrices have FPGA devie memory allocated
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
+inline xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
                           xfblasOperation_t transb,
                           int m,
                           int n,
@@ -901,7 +901,7 @@ xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
     }
 }
 
-xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
+inline xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
                           xfblasOperation_t transb,
                           int m,
                           int n,
@@ -949,7 +949,7 @@ xfblasStatus_t xfblasGemm(xfblasOperation_t transa,
     }
 }
 
-xfblasStatus_t xfblasGemmByAddress(unsigned int l_aOff,
+inline xfblasStatus_t xfblasGemmByAddress(unsigned int l_aOff,
                                    unsigned int l_bOff,
                                    unsigned int l_cOff,
                                    unsigned int l_xOff,
@@ -989,7 +989,7 @@ xfblasStatus_t xfblasGemmByAddress(unsigned int l_aOff,
  * @retval xfblasStatus_t 3 if not all the matrices have FPGA devie memory allocated
  * @retval xfblasStatus_t 4 if the engine is not supported for now
  */
-xfblasStatus_t xfblasGemv(xfblasOperation_t trans,
+inline xfblasStatus_t xfblasGemv(xfblasOperation_t trans,
                           int m,
                           int n,
                           int alpha,
@@ -1037,7 +1037,7 @@ xfblasStatus_t xfblasGemv(xfblasOperation_t trans,
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasGetByPointer(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasGetByPointer(void* A, unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -1056,7 +1056,7 @@ xfblasStatus_t xfblasGetByPointer(void* A, unsigned int kernelIndex = 0, unsigne
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for the matrix
  */
-xfblasStatus_t xfblasGetByAddress(void* A,
+inline xfblasStatus_t xfblasGetByAddress(void* A,
                                   unsigned long long p_bufSize,
                                   unsigned int offset,
                                   unsigned int kernelIndex = 0,
@@ -1077,7 +1077,7 @@ xfblasStatus_t xfblasGetByAddress(void* A,
  * @retval xfblasStatus_t 1 if the library was not initialized
  * @retval xfblasStatus_t 3 if there is no FPGA device memory allocated for instrution
  */
-xfblasStatus_t xfblasExecute(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
+inline xfblasStatus_t xfblasExecute(unsigned int kernelIndex = 0, unsigned int deviceIndex = 0) {
     if (ConfigDict::instance().m_dict.find("not_initialized") != ConfigDict::instance().m_dict.end()) {
         return XFBLAS_STATUS_NOT_INITIALIZED;
     }
@@ -1090,7 +1090,7 @@ xfblasStatus_t xfblasExecute(unsigned int kernelIndex = 0, unsigned int deviceIn
  * @param numKernels number of kernels that is being used, default is 1
  * @param deviceIndex index of device that is being used, default is 0
  */
-void xfblasExecuteAsync(unsigned int numKernels = 1, unsigned int deviceIndex = 0) {
+inline void xfblasExecuteAsync(unsigned int numKernels = 1, unsigned int deviceIndex = 0) {
     vector<future<xfblasStatus_t> > fuStatus;
     for (unsigned int i = 0; i < numKernels; i++) {
         fuStatus.push_back(async(launch::async, xfblasExecute, i, deviceIndex));

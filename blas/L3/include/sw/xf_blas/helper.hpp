@@ -36,7 +36,7 @@ class BLASArgs {
     virtual char* asByteArray() = 0;
 };
 
-xfblasStatus_t buildConfigDict(string p_configFile,
+inline xfblasStatus_t buildConfigDict(string p_configFile,
                                xfblasEngine_t p_engineName,
                                unordered_map<string, string>* p_configDict) {
     unordered_map<string, string> l_configDict;
@@ -93,11 +93,11 @@ xfblasStatus_t buildConfigDict(string p_configFile,
     return XFBLAS_STATUS_SUCCESS;
 }
 
-int getPaddedSize(int p_size, int p_minSize) {
+inline int getPaddedSize(int p_size, int p_minSize) {
     return p_size + p_minSize - 1 - (p_size - 1) % p_minSize;
 }
 
-int getTypeSize(string p_typeName) {
+inline int getTypeSize(string p_typeName) {
     if (p_typeName == "float") {
         return sizeof(float);
     } else if (p_typeName == "short") {
