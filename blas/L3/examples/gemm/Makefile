@@ -54,7 +54,7 @@ TARGET ?= hw
 # ################### Setting up default value of DEVICE ##############################
 DEVICE ?= xilinx_u250_gen3x16_xdma_3_1_202020_1
 
-# ###################### Setting up default value of HOST_ARCH ####################### 
+# ###################### Setting up default value of HOST_ARCH #######################
 HOST_ARCH ?= x86
 
 # #################### Checking if DEVICE in whitelist ############################
@@ -100,8 +100,8 @@ endif
 # ######################### Host compiler global settings ############################
 CXXFLAGS += -g -I$(XILINX_XRT)/include -I$(XILINX_VIVADO)/include -std=c++14 -O3 -Wall -Wno-unknown-pragmas -Wno-unused-label
 LDFLAGS += -g -L$(XILINX_XRT)/lib -lOpenCL -lpthread -lrt -Wno-unused-label -Wno-narrowing -DVERBOSE
-CXXFLAGS += -fmessage-length=0 
-CXXFLAGS += -I$(CUR_DIR)/src/ 
+CXXFLAGS += -fmessage-length=0
+CXXFLAGS += -I$(CUR_DIR)/src/
 
 ifeq ($(HOST_ARCH), x86)
 LDFLAGS += -L$(XILINX_VIVADO)/lnx64/tools/fpo_v7_0 -Wl,--as-needed -lgmp -lmpfr -lIp_floating_point_v7_0_bitacc_cmodel
@@ -214,8 +214,8 @@ cleanh:
 cleank:
 	-$(RMDIR) $(BUILD_DIR)/*.xclbin _vimage *xclbin.run_summary qemu-memory-_* emulation/ _vimage/ pl* start_simulation.sh *.xclbin
 	-$(RMDIR) _x_temp.*/_x.* _x_temp.*/.Xil _x_temp.*/profile_summary.* xo_* _x*
-	-$(RMDIR) _x_temp.*/dltmp* _x_temp.*/kernel_info.dat _x_temp.*/*.log 
-	-$(RMDIR) _x_temp.* 
+	-$(RMDIR) _x_temp.*/dltmp* _x_temp.*/kernel_info.dat _x_temp.*/*.log
+	-$(RMDIR) _x_temp.*
 
 cleanall: cleanh cleank
 	-$(RMDIR) $(BUILD_DIR)  build_dir.* emconfig.json *.html $(TEMP_DIR) $(CUR_DIR)/reports *.csv *.run_summary $(CUR_DIR)/*.raw package_* run_script.sh .ipcache *.str
